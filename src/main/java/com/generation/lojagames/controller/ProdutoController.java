@@ -1,5 +1,6 @@
 package com.generation.lojagames.controller;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,7 +19,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import com.generation.blogpessoal.repository.TemaRepository;
 import com.generation.lojagames.model.Produto;
 import com.generation.lojagames.repository.ProdutoRepository;
 
@@ -48,6 +48,17 @@ public class ProdutoController {
 	}
 	
 		//Gets personalizados
+	@GetMapping("/preco_maior/{preco}")
+	public ResponseEntity<List<Produto>> getByPreco(@PathVariable BigDecimal preco){
+		
+		return ResponseEntity.ok(produtoRepository.findAllByPrecoGreaterThanEqual(preco));	
+	} 
+	
+	@GetMapping("/preco_menor/{precoMenor}")
+	public ResponseEntity<List<Produto>> getByPrecoMenor(@PathVariable BigDecimal precoMenor){
+		
+		return ResponseEntity.ok(produtoRepository.findAllByPrecoLessThanEqual(precoMenor));	
+	} 
 
 	@PostMapping
 	public ResponseEntity<Produto> post(@Valid @RequestBody Produto produto) {
