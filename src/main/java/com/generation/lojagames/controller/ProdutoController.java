@@ -59,6 +59,12 @@ public class ProdutoController {
 		
 		return ResponseEntity.ok(produtoRepository.findAllByPrecoLessThanEqual(precoMenor));	
 	} 
+	
+	@GetMapping("/nome/{nome}")
+	public ResponseEntity<List<Produto>> getByNome(@PathVariable String nome){
+		
+		return ResponseEntity.ok(produtoRepository.findAllByNomeContainingIgnoreCase(nome));	
+	}
 
 	@PostMapping
 	public ResponseEntity<Produto> post(@Valid @RequestBody Produto produto) {
