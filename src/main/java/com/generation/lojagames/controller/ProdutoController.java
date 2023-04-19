@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import com.generation.blogpessoal.repository.TemaRepository;
 import com.generation.lojagames.model.Produto;
 import com.generation.lojagames.repository.ProdutoRepository;
 
@@ -31,7 +32,7 @@ public class ProdutoController {
 	// Injeção de dependências
 	@Autowired
 	private ProdutoRepository produtoRepository;
-
+	
 	// Metódos
 	@GetMapping
 	public ResponseEntity<List<Produto>> getAll() {

@@ -2,12 +2,16 @@ package com.generation.lojagames.model;
 
 import java.math.BigDecimal;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
 
@@ -27,17 +31,21 @@ public class Produto {
 	@Size(min = 10, max = 500, message = "O atributo 'descricao' deve ter no mínimo 10 e no máximo 500 caracteres")
 	private String descricao;
 	
-	@Size(min = 10, max = 255, message = "O atributo 'descricao' deve ter no mínimo 10 e no máximo 255 caracteres")
+	@Size(min = 1, max = 255, message = "O atributo 'descricao' deve ter no mínimo 1 e no máximo 255 caracteres")
 	private String console;
 	
-	@NotBlank (message= "O atributo 'Quantidade em Estoque' é obrigatório!")
 	private int quantEstoque;
 	
-	@NotBlank (message= "O atributo 'preço' é obrigatório!")
+	@NotNull (message= "O atributo 'preço' é obrigatório!")
 	@Positive (message= "O valor deve ser maior que zero!")
 	private BigDecimal preco;
 	
 	private String foto;
+	
+	// RELACIONAMENTO COM A CLASSE CATEGORIA
+	@ManyToOne
+	@JsonIgnoreProperties("produto")
+	private Categoria categoria;
 
 	//Get e Set
 	public Long getId() {
@@ -95,5 +103,16 @@ public class Produto {
 	public void setFoto(String foto) {
 		this.foto = foto;
 	}
+	//Get e Set do objeto Categoria
+
+	public Categoria getCategoria() {
+		return categoria;
+	}
+
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
+	}
+	
+
 
 }
