@@ -2,13 +2,17 @@ package com.generation.lojagames.model;
 
 import java.math.BigDecimal;
 
+import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
 
+@Entity
+@Table(name = "tb_produtos")
 public class Produto {
 	
 	@Id
